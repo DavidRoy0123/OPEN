@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Roy - Bible Teachings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #ff7b25;
+            --blue: #0066cc;
+            --light-blue: #66ccff;
+            --white: #ffffff;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--orange), var(--blue), var(--light-blue), var(--white));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--orange);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--orange);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 123, 37, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 123, 37, 0.6);
+        }
+        
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .floating-icons i {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .bible-section {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--blue);
+        }
+        
+        .gospels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .gospel-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .gospel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gospel-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .matthew { background-image: url('https://images.unsplash.com/photo-1532033375034-a29004ea9769?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'); }
+        .mark { background-image: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'); }
+        .luke { background-image: url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'); }
+        .john { background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'); }
+        
+        .gospel-content {
+            padding: 25px;
+        }
+        
+        .gospel-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--blue);
+        }
+        
+        .gospel-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--orange);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .read-more:hover {
+            color: var(--blue);
+        }
+        
+        .full-chapter {
+            display: none;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        .summary-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+        }
+        
+        .summary-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .summary-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--blue);
+            text-align: center;
+        }
+        
+        .summary-text {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--orange);
+            transform: translateY(-5px);
+        }
+        
+        .footer-text {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">David Roy</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gospels">Gospels</a></li>
+                        <li><a href="#summary">Bible Summary</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="floating-icons">
+            <!-- These will be generated by JavaScript -->
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Discover the Word of God</h1>
+                <p>Teaching the Bible with love, wisdom, and understanding</p>
+                <a href="#gospels" class="btn">Explore the Gospels</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bible-section" id="gospels">
+        <div class="container">
+            <h2 class="section-title">The Four Gospels</h2>
+            <div class="gospels">
+                <div class="gospel-card">
+                    <div class="gospel-img matthew"></div>
+                    <div class="gospel-content">
+                        <h3 class="gospel-title">Matthew</h3>
+                        <div class="gospel-text">
+                            <p>The book of Matthew presents Jesus as the Messiah, the fulfillment of Old Testament prophecies. It begins with the genealogy of Jesus and includes the Sermon on the Mount and many parables...</p>
+                            <a href="#" class="read-more" data-chapter="matthew">Read More</a>
+                        </div>
+                        <div class="full-chapter" id="matthew">
+                            <p>The full text of Matthew would appear here when "Read More" is clicked. This would include all chapters of Matthew's Gospel detailing Jesus' life, teachings, death, and resurrection.</p>
+                            <p>Chapter 1: The genealogy of Jesus Christ, the son of David, the son of Abraham...</p>
+                            <p>Chapter 2: The visit of the Magi, the flight to Egypt, and the return to Nazareth...</p>
+                            <!-- Continue with all chapters -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gospel-card">
+                    <div class="gospel-img mark"></div>
+                    <div class="gospel-content">
+                        <h3 class="gospel-title">Mark</h3>
+                        <div class="gospel-text">
+                            <p>The Gospel of Mark is the shortest gospel and emphasizes Jesus' actions more than his teachings. It presents Jesus as the suffering servant and focuses on his miracles and the way of the cross...</p>
+                            <a href="#" class="read-more" data-chapter="mark">Read More</a>
+                        </div>
+                        <div class="full-chapter" id="mark">
+                            <p>The full text of Mark would appear here when "Read More" is clicked. This gospel is known for its fast-paced narrative of Jesus' ministry.</p>
+                            <p>Chapter 1: The beginning of the good news about Jesus the Messiah, the Son of God...</p>
+                            <p>Chapter 2: Jesus heals a paralyzed man and calls Levi the tax collector...</p>
+                            <!-- Continue with all chapters -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gospel-card">
+                    <div class="gospel-img luke"></div>
+                    <div class="gospel-content">
+                        <h3 class="gospel-title">Luke</h3>
+                        <div class="gospel-text">
+                            <p>Luke's Gospel emphasizes Jesus' compassion for the poor, women, and social outcasts. It includes unique parables like the Good Samaritan and the Prodigal Son, and gives special attention to prayer...</p>
+                            <a href="#" class="read-more" data-chapter="luke">Read More</a>
+                        </div>
+                        <div class="full-chapter" id="luke">
+                            <p>The full text of Luke would appear here when "Read More" is clicked. Luke provides the most complete account of Jesus' life and includes many unique stories.</p>
+                            <p>Chapter 1: The birth of John the Baptist foretold. The angel Gabriel appears to Mary...</p>
+                            <p>Chapter 2: The birth of Jesus in Bethlehem. The shepherds visit. Jesus at the temple...</p>
+                            <!-- Continue with all chapters -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gospel-card">
+                    <div class="gospel-img john"></div>
+                    <div class="gospel-content">
+                        <h3 class="gospel-title">John</h3>
+                        <div class="gospel-text">
+                            <p>John's Gospel is the most theological, presenting Jesus as the divine Word made flesh. It includes the famous "I am" sayings and focuses on Jesus' identity as the Son of God who gives eternal life...</p>
+                            <a href="#" class="read-more" data-chapter="john">Read More</a>
+                        </div>
+                        <div class="full-chapter" id="john">
+                            <p>The full text of John would appear here when "Read More" is clicked. This gospel contains deep theological reflections on Jesus' identity.</p>
+                            <p>Chapter 1: In the beginning was the Word, and the Word was with God, and the Word was God...</p>
+                            <p>Chapter 2: The wedding at Cana where Jesus turns water into wine. Cleansing of the temple...</p>
+                            <!-- Continue with all chapters -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="summary-section" id="summary">
+        <div class="container">
+            <div class="summary-content">
+                <h2 class="summary-title">Bible Summary</h2>
+                <p class="summary-text">The Bible is God's love letter to humanity, divided into the Old Testament (before Christ) and New Testament (the life of Christ and the early church). It reveals God's plan of salvation through Jesus Christ.</p>
+                
+                <p class="summary-text">The central message is God's love demonstrated through Jesus' life, death on the cross, and resurrection. Jesus' sacrifice provides forgiveness of sins and reconciliation with God for all who believe.</p>
+                
+                <p class="summary-text">Key themes include: God's sovereignty, human sinfulness, redemption through Christ, the power of the Holy Spirit, the hope of eternal life, and the call to love God and neighbor.</p>
+                
+                <p class="summary-text">The crucifixion of Jesus represents the ultimate act of love, where the sinless Son of God bore the punishment for our sins. His resurrection three days later conquered death and offers new life to all who trust in Him.</p>
+                
+                <p class="summary-text">The Bible concludes with the promise of Christ's return and the restoration of all things, where there will be no more pain, suffering, or death for those who are in Christ.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://facebook.com/DavidRoy" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://youtube.com/DavidRoy" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com/DavidRoy" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/8801300325329" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p class="footer-text">Contact David Roy for Bible studies and spiritual guidance</p>
+            <p class="footer-text">Call or WhatsApp: <a href="tel:+8801300325329" style="color: var(--light-blue);">+880 1300 325 329</a></p>
+            <p class="copyright">© 2023 David Roy Bible Teachings. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Create floating icons
+        const floatingIcons = document.querySelector('.floating-icons');
+        const icons = ['leaf', 'cross', 'dove', 'church', 'pray', 'bible', 'heart', 'star', 'flower', 'seedling'];
+        
+        for (let i = 0; i < 30; i++) {
+            const icon = document.createElement('i');
+            icon.className = `fas fa-${icons[Math.floor(Math.random() * icons.length)]}`;
+            icon.style.left = `${Math.random() * 100}%`;
+            icon.style.top = `${Math.random() * 100}%`;
+            icon.style.fontSize = `${Math.random() * 20 + 10}px`;
+            icon.style.animationDuration = `${Math.random() * 20 + 10}s`;
+            icon.style.animationDelay = `${Math.random() * 5}s`;
+            floatingIcons.appendChild(icon);
+        }
+        
+        // Read more functionality
+        document.querySelectorAll('.read-more').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const chapterId = this.getAttribute('data-chapter');
+                const fullChapter = document.getElementById(chapterId);
+                
+                if (fullChapter.style.display === 'block') {
+                    fullChapter.style.display = 'none';
+                    this.textContent = 'Read More';
+                } else {
+                    fullChapter.style.display = 'block';
+                    this.textContent = 'Read Less';
+                }
+            });
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
